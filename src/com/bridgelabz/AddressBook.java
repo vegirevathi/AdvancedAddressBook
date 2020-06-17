@@ -44,7 +44,7 @@ public class AddressBook {
                 RandomAccessFile raf = new RandomAccessFile(openFile, "rw");
                 int i = 0;
                 while (i == 0) {
-                    System.out.println("1. Add\n2. Edit\n3. Print\n");
+                    System.out.println("1. Add\n2. Edit\n3. Print\n4.Remove");
                     int option = utility.nextInt();
                     AddressBookManager addressBookManager = new AddressBookManager();
                     switch(option) {
@@ -59,6 +59,9 @@ public class AddressBook {
                         case 3:
                             addressBookManager.printAll();
                             System.out.println("All contacts are shown upto date");
+                            break;
+                        case 4:
+                            addressBookManager.remove();
                             break;
                         default:
                             System.out.println("Select anything before you proceed");

@@ -90,6 +90,23 @@ public class AddressBookManager {
         }
     }
 
+    public void remove() throws Exception {
+        System.out.println("Enter first name whose data is to be removed");
+        String firstName = utility.next();
+        int count = 0;
+        List<Person> list = new ArrayList<>();
+        for (Person P : list) {
+            if (firstName.contentEquals(P.getFirstName())) {
+                list.remove(P);
+                count++;
+                System.out.println("Data removed");
+            }
+        }
+        //List removeAll(listRemove);
+        if (count == 0)
+            System.out.println("No such data found");
+    }
+
     public static void addToFile(Person person) {
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             writer.write(person.getFirstName()+"\r\n" + person.getLastName() + "\r\n" + person.getPhoneNumber() + "\r\n");
