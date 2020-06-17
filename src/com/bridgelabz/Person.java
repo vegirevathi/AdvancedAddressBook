@@ -1,10 +1,14 @@
 package com.bridgelabz;
+import java.lang.String;
 
 public class Person {
     String firstName;
     String lastName;
     Address address;
     String phoneNumber;
+
+    public Person() {
+    }
 
     public String getFirstName() {
         return firstName;

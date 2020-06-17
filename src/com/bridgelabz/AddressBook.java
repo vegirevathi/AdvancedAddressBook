@@ -1,15 +1,13 @@
 package com.bridgelabz;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
 import java.util.Scanner;
 
 
 public class AddressBook {
-    Scanner utility = new Scanner(System.in);
-    public static List<Person> list = new ArrayList<Person>();
+    static Scanner utility = new Scanner(System.in);
+    private static File file;
+    private static AddressBookManager list;
 
     public void create() {
         try {
@@ -28,31 +26,31 @@ public class AddressBook {
             e.printStackTrace();
         }
         }
-    public List<Person> add() {
-        list.add(addUser());
-        for (Person P : list) {
-            System.out.println(P.toString());
+
+
+    public static void addToFile() {
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
+            Person person = new Person();
+            writer.write(person.getFirstName()+"\r\n" + person.getLastName() + "\r\n" + person.getPhoneNumber() + "\r\n");
+            System.out.println("Contact information is added into file");
+        } catch(IOException e) {
+            System.out.println(e);
         }
-        return list;
-    }
-    private Person addUser() {
-        Person person = new Person();
-        Address address = new Address();
-        System.out.println("Enter First Name: ");
-        person.setFirstName(utility.next());
-        System.out.println(person.getFirstName());
-        System.out.println("Enter Last Name: ");
-        person.setLastName(utility.next());
-        System.out.println("Enter city");
-        address.setCity(utility.next());
-        System.out.println("Enter state");
-        address.setState(utility.next());
-        System.out.println("Enter zip code");
-        address.setZip(utility.next());
-        System.out.println("Enter phone number");
-        person.setPhoneNumber(utility.next());
-        person.setAddress(address);
-        return person;
-        /* addToFile(person); */
-    }
+	}
+
+	 public static boolean readPeopleFromFile() throws IOException {
+	        try(BufferedReader reader = new BufferedReader(new FileReader(file))) {
+	            String name = null;
+	            while((name = reader.readLine()) != null) {
+	                Person person = new Person();
+                    list.add();
+                    reader.readLine();
+	            }
+	            return true;
+	        }
+	        catch ( IOException e) {
+	            System.out.println(e);
+	        }
+	        return false;
+	    }
 }
