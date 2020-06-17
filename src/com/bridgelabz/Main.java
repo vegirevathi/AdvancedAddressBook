@@ -1,8 +1,12 @@
 package com.bridgelabz;
 
-public class Main {
+import java.util.Scanner;
 
-    public static void main(String[] args) {
-        System.out.println("Welcome to Advanced Address Book");// write ySysour code here
+public class Main {
+    public static void main(String[] args) throws Exception {
+        System.out.println("Welcome to Advanced Address Book");
+        AddressBook addressBook = new AddressBook();
+        addressBook.add();
+        System.out.println("contact is added");
     }
 }
