@@ -1,5 +1,6 @@
 package com.bridgelabz;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -7,7 +8,9 @@ import java.util.Scanner;
 public class AddressBookManager {
     public static List<Person> list = new ArrayList<Person>();
     static Person person = new Person();
+    static AddressBook addressBook = new AddressBook();
     static Scanner utility = new Scanner(System.in);
+    private static File file;
 
     public List<Person> add() {
         list.add(addUser());
@@ -34,5 +37,81 @@ public class AddressBookManager {
         person.setPhoneNumber(utility.next());
         person.setAddress(address);
         return person;
+        //addToFile(person);
+    }
+
+    public Person edit() {
+        System.out.println("Enter first name");
+        String firstName = utility.next();
+        Address address = new Address();
+        int count = 0;
+
+        for (Person P : list) {
+            if (firstName.equals(P.getFirstName())) {
+                count++;
+                System.out.println("Data found\n");
+                System.out.println("1.To edit Address\n"
+                        + "2.To edit Phone Number\n"
+                        + "3.To edit City\n"
+                        + "4.To edit State\n"
+                        + "5.To edit Zip");
+                int editChoice = utility.nextInt();
+                switch(editChoice) {
+                    case 1:
+                        P.setAddress(address);
+                        break;
+                    case 2:
+                        P.setPhoneNumber(utility.next());
+                        break;
+                    case 3:
+                        address.setCity(utility.next());
+                        break;
+                    case 4:
+                        address.setState(utility.next());
+                        break;
+                    case 5:
+                        address.setZip(utility.next());
+                        break;
+                    default:
+                        System.out.println("No Changes are made\n");
+                        break;
+                }
+            }
+        }
+        if (count==0)
+            System.out.println("Data not found");
+        Person person = new Person();
+        return person;
+    }
+
+    public void printAll() {
+        for (Person P : list) {
+            System.out.println(P.toString());
+        }
+    }
+
+    public static void addToFile(Person person) {
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
+            writer.write(person.getFirstName()+"\r\n" + person.getLastName() + "\r\n" + person.getPhoneNumber() + "\r\n");
+            System.out.println("Contact information is added into file");
+        } catch(IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    public static boolean readPeopleFromFile() throws IOException {
+        try(BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String name = null;
+            while((name = reader.readLine()) != null) {
+                Person person = new Person();
+                list.add(addUser());
+                reader.readLine();
+            }
+            return true;
+        }
+        catch ( IOException e) {
+            System.out.println(e);
+        }
+        return false;
     }
 }

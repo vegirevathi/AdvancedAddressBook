@@ -27,30 +27,74 @@ public class AddressBook {
         }
         }
 
+    public static void open() {
+        try {
+            File f = new File("C:");
+            String[] files = f.list();
+            System.out.println("Files are:");
+            for (int i = 0; i < files.length; i++) {
+                System.out.println(files[i]);
+            }
+            System.out.println("Enter the name of the address book which you want to open");
+            String OpenAddressBookName = utility.next();
+            File openFile = new File( OpenAddressBookName+ ".csv");
 
-    public static void addToFile() {
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
-            Person person = new Person();
-            writer.write(person.getFirstName()+"\r\n" + person.getLastName() + "\r\n" + person.getPhoneNumber() + "\r\n");
-            System.out.println("Contact information is added into file");
-        } catch(IOException e) {
-            System.out.println(e);
+            if(openFile.exists()) {
+                System.out.println("File exists");
+                RandomAccessFile raf = new RandomAccessFile(openFile, "rw");
+                int i = 0;
+                while (i == 0) {
+                    System.out.println("1. Add\n2. Edit\n3. Print\n");
+                    int option = utility.nextInt();
+                    AddressBookManager addressBookManager = new AddressBookManager();
+                    switch(option) {
+                        case 1:
+                            addressBookManager.add();
+                            System.out.println("contact is added");
+                            break;
+                        case 2:
+                            addressBookManager.edit();
+                            System.out.println("contact is edited");
+                            break;
+                        case 3:
+                            addressBookManager.printAll();
+                            System.out.println("All contacts are shown upto date");
+                            break;
+                        default:
+                            System.out.println("Select anything before you proceed");
+                            break;
+                    }
+                    i++;
+                }
+                boolean found = false;
+                raf.close();
+                while (i == 0) {
+                    System.out.println(
+                            "1. Save the changes\n"
+                                    + "2. Dont save the changes\n");
+                    int choice = utility.nextInt();
+                    switch(choice) {
+                        case 1:
+                            System.out.println("last changes have been saved");
+                            break;
+                        case 2:
+                            System.out.println("last changes are not saved");
+                            break;
+                        default:
+                            System.out.println("Something went wrong");
+                            break;
+                    }
+                }
+            }
+            else {
+                System.out.println("File name does not exists");
+                AddressBook.open();
+            }
         }
-	}
+        catch (Exception e) {
+            System.out.println("An error occured");
+            e.printStackTrace();
+        }
+    }
 
-	 public static boolean readPeopleFromFile() throws IOException {
-	        try(BufferedReader reader = new BufferedReader(new FileReader(file))) {
-	            String name = null;
-	            while((name = reader.readLine()) != null) {
-	                Person person = new Person();
-                    list.add();
-                    reader.readLine();
-	            }
-	            return true;
-	        }
-	        catch ( IOException e) {
-	            System.out.println(e);
-	        }
-	        return false;
-	    }
 }
