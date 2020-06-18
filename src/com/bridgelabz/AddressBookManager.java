@@ -2,6 +2,7 @@ package com.bridgelabz;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,6 +13,7 @@ public class AddressBookManager {
     static AddressBookManager addressBookManager = new AddressBookManager();
     static Scanner utility = new Scanner(System.in);
     private static File file;
+    SortByName sortByName = new SortByName();
 
     public List<Person> add() {
         list.add(addUser());
@@ -128,5 +130,14 @@ public class AddressBookManager {
             System.out.println(e);
         }
         return false;
+
+    public void sortByName() {
+        Collections.sort(list, new SortByName());
+        System.out.println("Sorted by name");
+        for (int i=0; i<list.size(); i++) {
+            System.out.println(list.get(i));
+        }
+    }
+
 }
 
