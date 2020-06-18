@@ -14,6 +14,7 @@ public class AddressBookManager {
     static Scanner utility = new Scanner(System.in);
     private static File file;
     SortByName sortByName = new SortByName();
+    SortByZip sortByZip = new SortByZip();
 
     public List<Person> add() {
         list.add(addUser());
@@ -134,9 +135,19 @@ public class AddressBookManager {
     public void sortByName() {
         Collections.sort(list, new SortByName());
         System.out.println("Sorted by name");
-        for (int i=0; i<list.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }
+
+    }
+    public void sortByZip() {
+            Collections.sort(list, new SortByZip());
+            System.out.println("Sorted by zip");
+            for (int i=0; i<list.size(); i++) {
+                System.out.println(list.get(i));
+            }
+        }
+
     }
 
 }
