@@ -9,6 +9,7 @@ public class AddressBookManager {
     public static List<Person> list = new ArrayList<Person>();
     static Person person = new Person();
     static AddressBook addressBook = new AddressBook();
+    static AddressBookManager addressBookManager = new AddressBookManager();
     static Scanner utility = new Scanner(System.in);
     private static File file;
 
@@ -37,7 +38,6 @@ public class AddressBookManager {
         person.setPhoneNumber(utility.next());
         person.setAddress(address);
         return person;
-        //addToFile(person);
     }
 
     public Person edit() {
@@ -116,19 +116,5 @@ public class AddressBookManager {
         }
     }
 
-    public static boolean readPeopleFromFile() throws IOException {
-        try(BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String name = null;
-            while((name = reader.readLine()) != null) {
-                Person person = new Person();
-                list.add(addUser());
-                reader.readLine();
-            }
-            return true;
-        }
-        catch ( IOException e) {
-            System.out.println(e);
-        }
-        return false;
-    }
 }
+

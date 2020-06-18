@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class AddressBook {
     static Scanner utility = new Scanner(System.in);
-    private static File file;
+    public static File file;
     private static AddressBookManager list;
 
     public void create() {
