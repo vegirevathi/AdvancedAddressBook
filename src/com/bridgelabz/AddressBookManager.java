@@ -80,8 +80,6 @@ public class AddressBookManager {
         }
         if (count==0)
             System.out.println("Data not found");
-        Person person = new Person();
-        return person;
     }
 
     public void printAll() {
@@ -116,5 +114,19 @@ public class AddressBookManager {
         }
     }
 
+    private static boolean readPeopleFromFile() throws IOException {
+        try(BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String phoneNumber = null;
+            while((phoneNumber = reader.readLine()) != null) ;
+                Person person = new Person(name, reader.readLine(), reader.readLine(), reader.readLine(), reader.readLine());
+                list.add(addUser());        //adds person to the list
+                reader.readLine();
+            }
+            return true;
+        }
+        catch ( IOException e) {
+            System.out.println(e);
+        }
+        return false;
 }
 

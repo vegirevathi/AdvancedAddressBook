@@ -7,7 +7,8 @@ public class Person {
     Address address;
     String phoneNumber;
 
-    public Person() {
+
+    public Person(String phoneNumber, String s, String readLine, String line, String s1) {
     }
 
     public String getFirstName() {
