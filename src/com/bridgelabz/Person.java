@@ -4,12 +4,11 @@ import java.lang.String;
 public class Person {
     String firstName;
     String lastName;
-    Address address;
+    String city;
+    String state;
+    String zip;
     String phoneNumber;
 
-
-    public Person(String phoneNumber, String s, String readLine, String line, String s1) {
-    }
 
     public String getFirstName() {
         return firstName;
@@ -27,12 +26,28 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public Address getAddress() {
-        return address;
+    public String getCity() {
+        return city;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
     }
 
     public String getPhoneNumber() {
@@ -45,6 +60,6 @@ public class Person {
 
     @Override
     public String toString() {
-        return "\n\t\t\tPerson \n\t\t\tFirstName :" +firstName + "\n\t\t\tLast Name :" +lastName + "\n\t\t\tAddress :" +address + "\n\t\t\tPhone Number: " +phoneNumber + "\n\t";
+        return "\n\t\t\tPerson \n\t\t\tFirstName :" +firstName + "\n\t\t\tLast Name :" +lastName + "\n\t\t\tCity :" +city + "\n\t\t\tState :"+state + "\n\t\t\tZip :" +zip + "\n\t\t\tPhoneNumber: " +phoneNumber + "\n\t";
     }
 }

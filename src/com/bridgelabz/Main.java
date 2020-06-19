@@ -30,7 +30,8 @@ public class Main {
             default:
                 System.out.println("Try again");
                 break;
-            }    
+            }
+            i++;
         }
     }
 }

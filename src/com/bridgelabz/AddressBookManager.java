@@ -13,8 +13,6 @@ public class AddressBookManager {
     static AddressBookManager addressBookManager = new AddressBookManager();
     static Scanner utility = new Scanner(System.in);
     private static File file;
-    SortByName sortByName = new SortByName();
-    SortByZip sortByZip = new SortByZip();
 
     public List<Person> add() {
         list.add(addUser());
@@ -25,55 +23,46 @@ public class AddressBookManager {
     }
     public static Person addUser() {
         Person person = new Person();
-        Address address = new Address();
         System.out.println("Enter First Name: ");
         person.setFirstName(utility.next());
         System.out.println(person.getFirstName());
         System.out.println("Enter Last Name: ");
         person.setLastName(utility.next());
         System.out.println("Enter city");
-        address.setCity(utility.next());
+        person.setCity(utility.next());
         System.out.println("Enter state");
-        address.setState(utility.next());
+        person.setState(utility.next());
         System.out.println("Enter zip code");
-        address.setZip(utility.next());
+        person.setZip(utility.next());
         System.out.println("Enter phone number");
         person.setPhoneNumber(utility.next());
-        person.setAddress(address);
         return person;
     }
 
-    public Person edit() {
+    public void edit() {
         System.out.println("Enter first name");
         String firstName = utility.next();
-        Address address = new Address();
         int count = 0;
 
         for (Person P : list) {
             if (firstName.equals(P.getFirstName())) {
                 count++;
                 System.out.println("Data found\n");
-                System.out.println("1.To edit Address\n"
-                        + "2.To edit Phone Number\n"
-                        + "3.To edit City\n"
-                        + "4.To edit State\n"
-                        + "5.To edit Zip");
+                System.out.println("1.To edit phoneNumber\n2.To edit city\n3.To edit State\n4.To edit zip");
+
                 int editChoice = utility.nextInt();
                 switch(editChoice) {
                     case 1:
-                        P.setAddress(address);
-                        break;
-                    case 2:
                         P.setPhoneNumber(utility.next());
                         break;
+                    case 2:
+                        P.setCity(utility.next());
+                        break;
                     case 3:
-                        address.setCity(utility.next());
+                        P.setState(utility.next());
                         break;
                     case 4:
-                        address.setState(utility.next());
-                        break;
-                    case 5:
-                        address.setZip(utility.next());
+                        P.setZip(utility.next());
                         break;
                     default:
                         System.out.println("No Changes are made\n");
@@ -95,20 +84,19 @@ public class AddressBookManager {
         System.out.println("Enter first name whose data is to be removed");
         String firstName = utility.next();
         int count = 0;
-        List<Person> list = new ArrayList<>();
         for (Person P : list) {
             if (firstName.contentEquals(P.getFirstName())) {
                 list.remove(P);
                 count++;
                 System.out.println("Data removed");
             }
+            else {
+                System.out.println("No such data found");
+            }
         }
-        //List removeAll(listRemove);
-        if (count == 0)
-            System.out.println("No such data found");
     }
 
-    public static void addToFile(Person person) {
+   /* public static void addToFile(Person person) {
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             writer.write(person.getFirstName()+"\r\n" + person.getLastName() + "\r\n" + person.getPhoneNumber() + "\r\n");
             System.out.println("Contact information is added into file");
@@ -117,7 +105,7 @@ public class AddressBookManager {
         }
     }
 
-    private static boolean readPeopleFromFile() throws IOException {
+    /*private static boolean readPeopleFromFile() throws IOException {
         try(BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String phoneNumber = null;
             while((phoneNumber = reader.readLine()) != null) ;
@@ -131,24 +119,25 @@ public class AddressBookManager {
             System.out.println(e);
         }
         return false;
-
+*/
     public void sortByName() {
         Collections.sort(list, new SortByName());
         System.out.println("Sorted by name");
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
-        }
-
     }
     public void sortByZip() {
-            Collections.sort(list, new SortByZip());
-            System.out.println("Sorted by zip");
-            for (int i=0; i<list.size(); i++) {
-                System.out.println(list.get(i));
-            }
-        }
-
+        Collections.sort(list, new SortByZip());
+        System.out.println("Sorted by zip");
     }
 
+    public void sortByCity() {
+        Collections.sort(list, new SortByCity());
+        System.out.println("Sorted by zip");
+    }
+
+    public void sortByState() {
+        Collections.sort(list, new SortByState());
+        System.out.println("Sorted by zip");
+    }
 }
+
 

@@ -44,7 +44,7 @@ public class AddressBook {
                 RandomAccessFile raf = new RandomAccessFile(openFile, "rw");
                 int i = 0;
                 while (i == 0) {
-                    System.out.println("1. Add\n2. Edit\n3. Print\n4.Remove\n5.Sort By Name\n6.Sort By Zip");
+                    System.out.println("1. Add\n2. Edit\n3. Print\n4.Remove\n5.Sort By Name\n6.Sort By Zip\n7.Sort By City\n8.Sort By State");
                     int option = utility.nextInt();
                     AddressBookManager addressBookManager = new AddressBookManager();
                     switch(option) {
@@ -69,11 +69,16 @@ public class AddressBook {
                         case 6:
                             addressBookManager.sortByZip();
                             break;
+                        case 7:
+                            addressBookManager.sortByCity();
+                            break;
+                        case 8:
+                            addressBookManager.sortByState();
+                            break;
                         default:
                             System.out.println("Select anything before you proceed");
                             break;
                     }
-                    i++;
                 }
                 boolean found = false;
                 raf.close();
