@@ -1,6 +1,7 @@
 package com.bridgelabz;
 
 import java.io.*;
+import java.util.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,20 +13,24 @@ public class AddressBookManager {
     static AddressBook addressBook = new AddressBook();
     static AddressBookManager addressBookManager = new AddressBookManager();
     static Scanner utility = new Scanner(System.in);
-    private static File file;
+
+    HashMap<String,Person>cityMap = new HashMap<String,Person>();
+    HashMap<String,Person>stateMap = new HashMap<String,Person>();
 
     public List<Person> add() {
         list.add(addUser());
+        cityMap.put(person.getCity(),person);
+        stateMap.put(person.getState(),person);
         for (Person P : list) {
             System.out.println(P.toString());
         }
         return list;
     }
-    public static Person addUser() {
+
+    public Person addUser() {
         Person person = new Person();
         System.out.println("Enter First Name: ");
         person.setFirstName(utility.next());
-        System.out.println(person.getFirstName());
         System.out.println("Enter Last Name: ");
         person.setLastName(utility.next());
         System.out.println("Enter city");
@@ -80,7 +85,7 @@ public class AddressBookManager {
         }
     }
 
-    public void remove() throws Exception {
+    public void remove() {
         System.out.println("Enter first name whose data is to be removed");
         String firstName = utility.next();
         int count = 0;
@@ -96,30 +101,6 @@ public class AddressBookManager {
         }
     }
 
-   /* public static void addToFile(Person person) {
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
-            writer.write(person.getFirstName()+"\r\n" + person.getLastName() + "\r\n" + person.getPhoneNumber() + "\r\n");
-            System.out.println("Contact information is added into file");
-        } catch(IOException e) {
-            System.out.println(e);
-        }
-    }
-
-    /*private static boolean readPeopleFromFile() throws IOException {
-        try(BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String phoneNumber = null;
-            while((phoneNumber = reader.readLine()) != null) ;
-                Person person = new Person(name, reader.readLine(), reader.readLine(), reader.readLine(), reader.readLine());
-                list.add(addUser());        //adds person to the list
-                reader.readLine();
-            }
-            return true;
-        }
-        catch ( IOException e) {
-            System.out.println(e);
-        }
-        return false;
-*/
     public void sortByName() {
         Collections.sort(list, new SortByName());
         System.out.println("Sorted by name");
@@ -137,6 +118,18 @@ public class AddressBookManager {
     public void sortByState() {
         Collections.sort(list, new SortByState());
         System.out.println("Sorted by zip");
+    }
+
+    public void viewPersonByCity() {
+        System.out.println("Enter city");
+        String city=utility.next();
+        System.out.println(cityMap.get(person.getCity()));
+    }
+
+    public void viewPersonByState(){
+        System.out.println("Enter state");
+        String state=utility.next();
+        System.out.println(stateMap.get(state));
     }
 }
 

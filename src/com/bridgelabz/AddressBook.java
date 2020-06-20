@@ -44,7 +44,7 @@ public class AddressBook {
                 RandomAccessFile raf = new RandomAccessFile(openFile, "rw");
                 int i = 0;
                 while (i == 0) {
-                    System.out.println("1. Add\n2. Edit\n3. Print\n4.Remove\n5.Sort By Name\n6.Sort By Zip\n7.Sort By City\n8.Sort By State");
+                    System.out.println("1. Add\n2. Edit\n3. Print\n4.Remove\n5.Sort By Name\n6.Sort By Zip\n7.Sort By City\n8.Sort By State\n9.View Person By City\n10.View Person By State\n11.Exit");
                     int option = utility.nextInt();
                     AddressBookManager addressBookManager = new AddressBookManager();
                     switch(option) {
@@ -75,27 +75,16 @@ public class AddressBook {
                         case 8:
                             addressBookManager.sortByState();
                             break;
+                        case 9:
+                            addressBookManager.viewPersonByCity();
+                            break;
+                        case 10:
+                            addressBookManager.viewPersonByState();
+                            break;
+                        case 11:
+                            System.exit(0);
                         default:
                             System.out.println("Select anything before you proceed");
-                            break;
-                    }
-                }
-                boolean found = false;
-                raf.close();
-                while (i == 0) {
-                    System.out.println(
-                            "1. Save the changes\n"
-                                    + "2. Dont save the changes\n");
-                    int choice = utility.nextInt();
-                    switch(choice) {
-                        case 1:
-                            System.out.println("last changes have been saved");
-                            break;
-                        case 2:
-                            System.out.println("last changes are not saved");
-                            break;
-                        default:
-                            System.out.println("Something went wrong");
                             break;
                     }
                 }
